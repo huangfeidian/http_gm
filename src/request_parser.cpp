@@ -65,19 +65,19 @@ namespace http
 			std::size_t nparsed = http_parser_execute(&parser_, &parse_settings_, input, len);
 			if (parser_.upgrade)
 			{
-				return result_type::bad;
+				return request_parser::result_type::bad;
 			}
 			if (nparsed != len)
 			{
-				return result_type::bad;
+				return request_parser::result_type::bad;
 			}
 			if (req_complete_)
 			{
-				return result_type::good;
+				return request_parser::result_type::good;
 			}
 			else
 			{
-				return result_type::indeterminate;
+				return request_parser::result_type::indeterminate;
 			}
 		}
 		void request_parser::move_req(request& dest)

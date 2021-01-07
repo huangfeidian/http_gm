@@ -29,7 +29,7 @@ public:
 
   /// Construct the server to listen on the specified TCP address and port, and
   /// serve up files from the given directory.
-  explicit server(const std::string& address, const std::string& port, const request_handler* handler);
+  explicit server(asio::io_context& io_context, const std::string& address, const std::string& port, const request_handler& handler);
 
   /// Run the server's io_context loop.
   void run();
@@ -42,7 +42,7 @@ private:
   void do_await_stop();
 
   /// The io_context used to perform asynchronous operations.
-  asio::io_context io_context_;
+  asio::io_context& io_context_;
 
   /// The signal_set is used to register for process termination notifications.
   asio::signal_set signals_;
@@ -54,7 +54,10 @@ private:
   connection_manager connection_manager_;
 
   /// The handler for all incoming requests.
-  const request_handler* request_handler_;
+  const request_handler request_handler_;
+
+  const std::string address_;
+  const std::string port_;
 };
 
 } // namespace server

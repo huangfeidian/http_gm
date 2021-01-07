@@ -12,27 +12,16 @@
 #define HTTP_REQUEST_HANDLER_HPP
 
 #include <string>
+#include "request.hpp"
+#include "reply.hpp"
 
 namespace http {
 namespace server {
 
-struct reply;
-struct request;
 
 /// The common handler for all incoming requests.
-class request_handler
-{
-public:
-  request_handler(const request_handler&) = delete;
-  request_handler& operator=(const request_handler&) = delete;
-
-  /// Construct with a directory containing files to be served.
-  request_handler();
-
-  /// Handle a request and produce a reply.
-  virtual void handle_request(const request& req, reply& rep) const;
-
-};
+using reply_handler = std::function<void(const reply& rep)>;
+using request_handler = std::function<void(const request& req, reply_handler cb)>;
 
 } // namespace server
 } // namespace http

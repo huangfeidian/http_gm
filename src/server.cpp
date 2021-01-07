@@ -15,12 +15,14 @@
 namespace http {
 namespace server {
 
-server::server(const std::string& address, const std::string& port, const request_handler* handler)
-  : io_context_(1),
+server::server(asio::io_context& io_context, const std::string& address, const std::string& port, const request_handler& handler)
+  : io_context_(io_context),
     signals_(io_context_),
     acceptor_(io_context_),
     connection_manager_(),
-    request_handler_(handler)
+    request_handler_(handler),
+    address_(address),
+    port_(port)
 {
   // Register to handle the signals that indicate when the server should exit.
   // It is safe to register for the same signal multiple times in a program,
@@ -33,25 +35,21 @@ server::server(const std::string& address, const std::string& port, const reques
 
   do_await_stop();
 
-  // Open the acceptor with the option to reuse the address (i.e. SO_REUSEADDR).
-  asio::ip::tcp::resolver resolver(io_context_);
-  asio::ip::tcp::endpoint endpoint =
-    *resolver.resolve(address, port).begin();
-  acceptor_.open(endpoint.protocol());
-  acceptor_.set_option(asio::ip::tcp::acceptor::reuse_address(true));
-  acceptor_.bind(endpoint);
-  acceptor_.listen();
 
-  do_accept();
+
 }
 
 void server::run()
 {
-  // The io_context::run() call will block until all asynchronous operations
-  // have finished. While the server is running, there is always at least one
-  // asynchronous operation outstanding: the asynchronous accept call waiting
-  // for new incoming connections.
-  io_context_.run();
+    // Open the acceptor with the option to reuse the address (i.e. SO_REUSEADDR).
+    asio::ip::tcp::resolver resolver(io_context_);
+    asio::ip::tcp::endpoint endpoint =
+        *resolver.resolve(address_, port_).begin();
+    acceptor_.open(endpoint.protocol());
+    acceptor_.set_option(asio::ip::tcp::acceptor::reuse_address(true));
+    acceptor_.bind(endpoint);
+    acceptor_.listen();
+    do_accept();
 }
 
 void server::do_accept()

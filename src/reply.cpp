@@ -53,37 +53,37 @@ asio::const_buffer to_buffer(reply::status_type status)
 {
   switch (status)
   {
-  case reply::ok:
+  case reply::status_type::ok:
     return asio::buffer(ok);
-  case reply::created:
+  case reply::status_type::created:
     return asio::buffer(created);
-  case reply::accepted:
+  case reply::status_type::accepted:
     return asio::buffer(accepted);
-  case reply::no_content:
+  case reply::status_type::no_content:
     return asio::buffer(no_content);
-  case reply::multiple_choices:
+  case reply::status_type::multiple_choices:
     return asio::buffer(multiple_choices);
-  case reply::moved_permanently:
+  case reply::status_type::moved_permanently:
     return asio::buffer(moved_permanently);
-  case reply::moved_temporarily:
+  case reply::status_type::moved_temporarily:
     return asio::buffer(moved_temporarily);
-  case reply::not_modified:
+  case reply::status_type::not_modified:
     return asio::buffer(not_modified);
-  case reply::bad_request:
+  case reply::status_type::bad_request:
     return asio::buffer(bad_request);
-  case reply::unauthorized:
+  case reply::status_type::unauthorized:
     return asio::buffer(unauthorized);
-  case reply::forbidden:
+  case reply::status_type::forbidden:
     return asio::buffer(forbidden);
-  case reply::not_found:
+  case reply::status_type::not_found:
     return asio::buffer(not_found);
-  case reply::internal_server_error:
+  case reply::status_type::internal_server_error:
     return asio::buffer(internal_server_error);
-  case reply::not_implemented:
+  case reply::status_type::not_implemented:
     return asio::buffer(not_implemented);
-  case reply::bad_gateway:
+  case reply::status_type::bad_gateway:
     return asio::buffer(bad_gateway);
-  case reply::service_unavailable:
+  case reply::status_type::service_unavailable:
     return asio::buffer(service_unavailable);
   default:
     return asio::buffer(internal_server_error);
@@ -199,37 +199,37 @@ std::string to_string(reply::status_type status)
 {
   switch (status)
   {
-  case reply::ok:
+  case reply::status_type::ok:
     return ok;
-  case reply::created:
+  case reply::status_type::created:
     return created;
-  case reply::accepted:
+  case reply::status_type::accepted:
     return accepted;
-  case reply::no_content:
+  case reply::status_type::no_content:
     return no_content;
-  case reply::multiple_choices:
+  case reply::status_type::multiple_choices:
     return multiple_choices;
-  case reply::moved_permanently:
+  case reply::status_type::moved_permanently:
     return moved_permanently;
-  case reply::moved_temporarily:
+  case reply::status_type::moved_temporarily:
     return moved_temporarily;
-  case reply::not_modified:
+  case reply::status_type::not_modified:
     return not_modified;
-  case reply::bad_request:
+  case reply::status_type::bad_request:
     return bad_request;
-  case reply::unauthorized:
+  case reply::status_type::unauthorized:
     return unauthorized;
-  case reply::forbidden:
+  case reply::status_type::forbidden:
     return forbidden;
-  case reply::not_found:
+  case reply::status_type::not_found:
     return not_found;
-  case reply::internal_server_error:
+  case reply::status_type::internal_server_error:
     return internal_server_error;
-  case reply::not_implemented:
+  case reply::status_type::not_implemented:
     return not_implemented;
-  case reply::bad_gateway:
+  case reply::status_type::bad_gateway:
     return bad_gateway;
-  case reply::service_unavailable:
+  case reply::status_type::service_unavailable:
     return service_unavailable;
   default:
     return internal_server_error;

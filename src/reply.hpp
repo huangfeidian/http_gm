@@ -23,7 +23,7 @@ namespace server {
 struct reply
 {
   /// The status of the reply.
-  enum status_type
+    enum class  status_type
   {
     ok = 200,
     created = 201,

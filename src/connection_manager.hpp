@@ -13,6 +13,7 @@
 
 #include <set>
 #include "connection.hpp"
+#include <mutex>
 
 namespace http {
 namespace server {
@@ -40,6 +41,7 @@ public:
 private:
   /// The managed connections.
   std::set<connection_ptr> connections_;
+  std::mutex con_mutex_;
 };
 
 } // namespace server
