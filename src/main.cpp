@@ -1,22 +1,15 @@
-//
-// main.cpp
-// ~~~~~~~~
-//
-// Copyright (c) 2003-2020 Christopher M. Kohlhoff (chris at kohlhoff dot com)
-//
-// Distributed under the Boost Software License, Version 1.0. (See accompanying
-// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
-//
+
 
 #include <iostream>
 #include <string>
 #include <asio.hpp>
-#include "server.hpp"
+#include <http_server/http_server.hpp>
 #include "gm_echo.h"
 #include "gm_handler.h"
 
-using namespace http::server;
-using namespace http::utility;
+using namespace spiritsaway::http_server;
+using namespace spiritsaway::http_gm;
+
 int main(int argc, char* argv[])
 {
 
@@ -34,7 +27,7 @@ int main(int argc, char* argv[])
 		// Initialise the server.
 		std::string address = "0.0.0.0";
 		std::string port = "8080";
-		http::server::server s(cur_context, address, port, gm_handler());
+		server s(cur_context, address, port, gm_handler());
 
 		// Run the server until stopped.
 		s.run();

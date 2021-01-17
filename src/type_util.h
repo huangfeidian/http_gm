@@ -22,7 +22,7 @@ constexpr auto type_name() noexcept
 	return name;
 }
 
-namespace http::utility
+namespace spiritsaway::http_gm
 {
 
 

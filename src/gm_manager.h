@@ -3,7 +3,7 @@
 #include "base_factory.h"
 #include <nlohmann/json.hpp>
 
-namespace http::utility
+namespace spiritsaway::http_gm
 {
 	using json = nlohmann::json;
 	class gm_worker
@@ -43,7 +43,7 @@ namespace http::utility
 			return m_id;
 		}
 	};
-	using gm_factory = utility::basic_poly_factory<utility::raw_ptr_t, gm_worker, std::uint32_t, const json&>;
+	using gm_factory = basic_poly_factory<raw_ptr_t, gm_worker, std::uint32_t, const json&>;
 	using gm_callback_t = std::function<void(bool, const json&)>;
 	class gm_manager
 	{

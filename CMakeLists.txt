@@ -3,9 +3,7 @@ cmake_minimum_required(VERSION 3.10)
 
 find_package(nlohmann_json CONFIG REQUIRED)
 
-include_directories(${ASIO_DIR})
-add_definitions(-DASIO_STANDALONE)
-add_definitions(-DASIO_MSVC)
+
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -14,9 +12,10 @@ add_definitions(-DBOOST_ASIO_HAS_MOVE)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /std:c++latest")
 endif(MSVC)
 
-
-FILE(GLOB_RECURSE SRC_LISTS ${CMAKE_SOURCE_DIR}/src/*.cpp ${CMAKE_SOURCE_DIR}/src/*.c)
-FILE(GLOB_RECURSE HEADER_LISTS ${CMAKE_SOURCE_DIR}/src/*.hpp ${CMAKE_SOURCE_DIR}/src/*.h)
+find_package(http_server REQUIRED)
+include_directories(${http_server_include_dirs})
+FILE(GLOB_RECURSE SRC_LISTS ${CMAKE_SOURCE_DIR}/src/*.cpp )
+FILE(GLOB_RECURSE HEADER_LISTS  ${CMAKE_SOURCE_DIR}/src/*.h)
 
 add_executable(${PROJECT_NAME} ${SRC_LISTS} ${HEADER_LISTS})
-target_link_libraries(${PROJECT_NAME} nlohmann_json::nlohmann_json)
+target_link_libraries(${PROJECT_NAME} nlohmann_json::nlohmann_json ${http_server_lib})

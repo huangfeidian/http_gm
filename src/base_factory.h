@@ -7,7 +7,7 @@
 #include <cstdlib>
 #include "type_util.h"
 
-namespace http::utility
+namespace spiritsaway::http_gm
 {
 	template <typename T>
 	using raw_ptr_t = T*;

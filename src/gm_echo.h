@@ -1,6 +1,6 @@
 #pragma once
 #include "gm_manager.h"
-namespace http::utility
+namespace spiritsaway::http_gm
 {
     class gm_echo final : public gm_factory::sub_class<gm_echo>
     {

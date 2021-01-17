@@ -1,7 +1,7 @@
 #include "gm_manager.h"
-#include "request_handler.hpp"
+#include <http_server/http_packet.hpp>
 
-namespace http::utility
+namespace spiritsaway::http_gm
 {
 	class gm_handler
 	{
@@ -32,7 +32,7 @@ namespace http::utility
             param_body = *params_iter;
             return "";
 		}
-		void operator()(const server::request& req, server::reply_handler cb)
+		void operator()(const spiritsaway::http_server::request& req, spiritsaway::http_server::reply_handler cb)
 		{
             std::string method;
             json param_body;
@@ -43,8 +43,8 @@ namespace http::utility
                 json final_reply;
                 final_reply["suc"] = suc;
                 final_reply["reply"] = reply_json;
-                server::reply  cur_reply;
-                cur_reply.status = server::reply::status_type::ok;
+                spiritsaway::http_server::reply  cur_reply;
+                cur_reply.status = spiritsaway::http_server::reply::status_type::ok;
                 cur_reply.content = final_reply.dump();
                 cb(cur_reply);
             };
