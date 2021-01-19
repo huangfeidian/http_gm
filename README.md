@@ -1,12 +1,8 @@
 
 # http gm server
 ## 依赖
-一个基于asio standalone, http parser和json的 http server，主要用来处理gm指令
-1. asio https://github.com/chriskohlhoff/asio 需要用1.12以后的版本 因为他根据cpp 20改了接口
-2. http parser https://github.com/nodejs/http-parser 对应的代码已经内嵌
-3. json https://github.com/nlohmann/json
+1. http_server https://github.com/huangfeidian/http_server 
 
-编译选项开启cpp 17， cmake编译时需要传入-DASIO_DIR,来指定asio.hpp所在的文件夹。
 
 ## 使用方法
 
