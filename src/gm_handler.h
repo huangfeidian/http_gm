@@ -32,8 +32,14 @@ namespace spiritsaway::http_gm
             param_body = *params_iter;
             return "";
 		}
-		void operator()(const spiritsaway::http_server::request& req, spiritsaway::http_server::reply_handler cb)
+		void operator()(std::weak_ptr<spiritsaway::http_server::request> weak_req, spiritsaway::http_server::reply_handler cb)
 		{
+            auto req_ptr = weak_req.lock();
+            if(!req_ptr)
+            {
+                return;
+            }
+            auto& req = *req_ptr;
             std::string method;
             json param_body;
             auto error_info = check_request(req.body, method, param_body);
